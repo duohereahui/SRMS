@@ -35,7 +35,7 @@ export const getResearchByType = async (type) => {
   }
 };
 
-// 按状态筛选（draft/published等）
+// 按状态筛选（draft/published/submitted）
 export const getResearchByStatus = async (status) => {
   try {
     const response = await api.get('/state', { params: { status } });
@@ -55,7 +55,7 @@ export const searchResearch = async (keyword) => {
   }
 };
 
-// 创建科研成果（草稿）
+// 创建科研成果
 export const createResearch = async (researchData) => {
   try {
     const response = await api.post('/', researchData);

@@ -5,7 +5,7 @@ const api = axios.create({
   timeout: 5000
 });
 
-// 实验室基础操作
+// 创建新的实验室
 export const createLab = async (labData) => {
   const params = new URLSearchParams();
   params.append('name', labData.name);
@@ -21,6 +21,7 @@ export const createLab = async (labData) => {
   }
 };
 
+// 更新实验室信息
 export const updateLab = async (labId, updateData) => {
   const params = new URLSearchParams();
   if (updateData.description) params.append('description', updateData.description);
@@ -35,6 +36,7 @@ export const updateLab = async (labId, updateData) => {
   }
 };
 
+// 删除实验室
 export const deleteLab = async (labId) => {
   try {
     await api.delete(`/${labId}`);
@@ -44,7 +46,7 @@ export const deleteLab = async (labId) => {
   }
 };
 
-// 实验室查询
+// keyword实验室模糊搜索（范围name+description）
 export const searchLabs = async (keyword) => {
   try {
     const response = await api.get('/search', { params: { name: keyword } });
@@ -54,6 +56,7 @@ export const searchLabs = async (keyword) => {
   }
 };
 
+// 获取单个实验室详情
 export const getLabDetails = async (labId) => {
   try {
     const response = await api.get(`/${labId}`);
@@ -63,6 +66,7 @@ export const getLabDetails = async (labId) => {
   }
 };
 
+// 获取所有实验室
 export const getAllLabs = async () => {
   try {
     const response = await api.get('/');
@@ -72,7 +76,7 @@ export const getAllLabs = async () => {
   }
 };
 
-// 实验室成员管理
+// 获取实验室学生
 export const getLabStudents = async (labId) => {
   try {
     const response = await api.get(`/${labId}/students`);
@@ -82,6 +86,7 @@ export const getLabStudents = async (labId) => {
   }
 };
 
+//获取实验室教师
 export const getLabTeachers = async (labId) => {
   try {
     const response = await api.get(`/${labId}/teachers`);
@@ -91,7 +96,7 @@ export const getLabTeachers = async (labId) => {
   }
 };
 
-// 实验室资源管理
+// 获取实验室全部资源
 export const getLabResources = async (labId) => {
   try {
     const response = await api.get(`/${labId}/resources`);
@@ -101,6 +106,7 @@ export const getLabResources = async (labId) => {
   }
 };
 
+//为指定实验室新增资源
 export const createResource = async (labId, resourceData) => {
   const params = new URLSearchParams();
   params.append('name', resourceData.name);

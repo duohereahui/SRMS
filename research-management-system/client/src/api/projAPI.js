@@ -25,7 +25,7 @@ export const getProjectById = async (partId) => {
   }
 };
 
-// 项目搜索
+// keyword模糊搜索（范围：name+partMember_name+description）
 export const searchProjects = async (keyword) => {
   try {
     const response = await api.get('/search', { params: { keyword } });
@@ -35,7 +35,7 @@ export const searchProjects = async (keyword) => {
   }
 };
 
-// 按部门查询项目
+// 按学院id查询项目
 export const getProjectsByDept = async (deptId) => {
   try {
     const response = await api.get(`/department/${deptId}`);
