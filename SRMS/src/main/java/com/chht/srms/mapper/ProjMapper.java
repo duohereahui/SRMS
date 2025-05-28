@@ -28,7 +28,8 @@ public interface ProjMapper {
                 if (project.getBudget() != null ) VALUES("budget", "#{budget}");
                 if(project.getEnd_date() != null) VALUES("end_date", "#{end_date}");
                 if (project.getStart_date() != null) VALUES("start_date", "#{start_date}");
-                if(project.getDepartment_id() != null) VALUES("department_id", "#{department_id}");
+                if (project.getDepartment_id() != null) VALUES("department_id", "#{department_id}");
+                if (project.getType() != null) VALUES("type", "#{type}");
             }}.toString();
         }
         public String updateProjectDynamic(ProjectDetail project) {
@@ -43,6 +44,7 @@ public interface ProjMapper {
                 if (project.getEnd_date() != null) SET("end_date = #{end_date}");
                 if (project.getStart_date() != null) SET("start_date = #{start_date}");
                 if (project.getDepartment_id() != null) SET("department_id = #{department_id}");
+                if (project.getType() != null) SET("type = #{type}");
                 WHERE("project_id = #{project_id}");
             }}.toString();
         }
@@ -50,7 +52,7 @@ public interface ProjMapper {
 
 
 
-    @Select("SELECT p.*, u.username as leader_name, p.lab_id FROM projects p LEFT JOIN user u ON p.leader_id = u.user_id order by project_id DESC")
+    @Select("SELECT p.*, u.username as leader_name, p.lab_id, p.type FROM projects p LEFT JOIN user u ON p.leader_id = u.user_id order by project_id DESC")
     List<ProjectDetail> selectAll();
     
     @Select("SELECT p.*, u.username as leader_name FROM projects p LEFT JOIN user u ON p.leader_id = u.user_id WHERE status = #{status} order by project_id DESC")
@@ -64,7 +66,7 @@ public interface ProjMapper {
             "LEFT JOIN user u ON pm.user_id = u.user_id " +
             "WHERE p.title LIKE CONCAT('%',#{keyword},'%') " +
             "OR p.description LIKE CONCAT('%',#{keyword},'%') " +
-            "OR u.username LIKE CONCAT('%',#{keyword},'%')")
+            "OR u.username LIKE CONCAT('%',#{keyword},'%') OR p.type LIKE CONCAT('%',#{keyword},'%')")
     List<ProjectDetail> searchProjects(String keyword);
 
 

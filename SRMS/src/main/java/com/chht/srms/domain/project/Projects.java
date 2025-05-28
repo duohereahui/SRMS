@@ -8,6 +8,7 @@ import lombok.Data;
 public class Projects {
     private Long project_id;
     private String title;
+    
     private String description;
     private Long leader_id;
     private String status;
@@ -18,4 +19,5 @@ public class Projects {
     private Double actual_funds;
     private Long department_id;
     private Long lab_id;
+    private String type;  //国家级 省级 横向
 }
