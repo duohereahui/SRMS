@@ -10,7 +10,6 @@ public class Resource {
     private String name;
     private String location;
     private String type;  //equipment,consumables,software
-    private String status;
-    private Date purchase_date;
+    private String description;
     private Long lab_id;
 }

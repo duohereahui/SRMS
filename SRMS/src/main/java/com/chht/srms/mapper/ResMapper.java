@@ -1,7 +1,7 @@
 package com.chht.srms.mapper;
 
-import com.chht.srms.domain.research.ResearchAuthors;
-import com.chht.srms.domain.research.ResearchOutputs;
+import com.chht.srms.domain.achievements.AchievementsAuthors;
+import com.chht.srms.domain.achievements.AchievementsOutputs;
 import org.apache.ibatis.annotations.*;
 import org.apache.ibatis.jdbc.SQL;
 
@@ -11,7 +11,7 @@ import java.util.Map;
 @Mapper
 public interface ResMapper {
     public class ResSqlProvider {
-        public String updateResDynamic(ResearchOutputs res) {
+        public String updateResDynamic(AchievementsOutputs res) {
             return new SQL() {{
                 UPDATE("research_outputs");
                 if (res.getTitle() != null) SET("title = #{title}");
@@ -45,7 +45,7 @@ public interface ResMapper {
             "</trim>" +
             "</script>")
     @Options(useGeneratedKeys = true, keyProperty = "research_id")
-    void insertRes(ResearchOutputs res);
+    void insertRes(AchievementsOutputs res);
 
     @Select({"<script>",
         "SELECT ro.*, GROUP_CONCAT(ra.author_id) as author_ids " +
@@ -59,11 +59,11 @@ public interface ResMapper {
         "</where>",
         "GROUP BY ro.research_id",
         "</script>"})
-    List<ResearchOutputs> select(@Param("params") Map<String, String> params);
+    List<AchievementsOutputs> select(@Param("params") Map<String, String> params);
 
 
     @Select("SELECT research_id, r.author_id, u.username,r.role FROM research_authors r LEFT JOIN user u ON r.author_id = u.user_id WHERE r.research_id = #{resId}")
-    List<ResearchAuthors> selectAuthorByResearchId(@Param("resId") Long resId);
+    List<AchievementsAuthors> selectAuthorByResearchId(@Param("resId") Long resId);
 
 
     @Select("SELECT DISTINCT r.*  FROM research_outputs r " +
@@ -73,16 +73,16 @@ public interface ResMapper {
             "OR r.description LIKE CONCAT('%',#{keyword},'%') " +
             "OR u.username LIKE CONCAT('%',#{keyword},'%')" +
             "OR r.journal_name LIKE CONCAT('%',#{keyword},'%')")
-    List<ResearchOutputs> searchResearch(String keyword);
+    List<AchievementsOutputs> searchResearch(String keyword);
 
     @UpdateProvider(type = ResSqlProvider.class, method = "updateResDynamic")
-    void updateRes(ResearchOutputs update);
+    void updateRes(AchievementsOutputs update);
 
     @Delete("DELETE FROM research_outputs WHERE research_id = #{researchId}")
     int deleteResearchById(Long researchId);
 
     @Insert("INSERT INTO research_authors(research_id, author_id , role) VALUES(#{research_id},#{author_id},#{role})")
-    void insertAuthor(ResearchAuthors author);
+    void insertAuthor(AchievementsAuthors author);
 
     @Delete("DELETE FROM research_authors WHERE research_id=#{research_id}")
     void deleteAuthor(Long research_id);

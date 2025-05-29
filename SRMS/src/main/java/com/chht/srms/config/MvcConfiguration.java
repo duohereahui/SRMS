@@ -15,7 +15,7 @@ public class MvcConfiguration implements WebMvcConfigurer {
                 .allowedOrigins("*")     //允许那些域访问
                 .allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS")
                 .allowedHeaders("*")
-                .allowCredentials(false);;
+                .allowCredentials(false);
 
     }
 }

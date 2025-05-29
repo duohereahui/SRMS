@@ -1,6 +1,6 @@
 package com.chht.srms.service.impl;
 
-import com.chht.srms.domain.project.ProjectDetail;
+import com.chht.srms.domain.project.ProjectOutputs;
 import com.chht.srms.domain.project.ProjectMembers;
 import com.chht.srms.mapper.ProjMapper;
 import com.chht.srms.mapper.ProjectMembersMapper;
@@ -23,37 +23,37 @@ public class ProjServiceImpl implements ProjService {
     @Autowired
     private ProjectMembersMapper projectMembersMapper;
 
-    public List<ProjectDetail> getAllProjects() {
-        List<ProjectDetail> projects = projMapper.selectAll();
+    public List<ProjectOutputs> getAllProjects() {
+        List<ProjectOutputs> projects = projMapper.selectAll();
         projects.forEach(p -> p.setMembers(membersMapper.selectByProject(p.getProject_id())));
         return projects;
     }
 
-    public List<ProjectDetail> searchProjectsByDept(Long deptId){
-        List<ProjectDetail> projects = projMapper.selectByDepartment(deptId);
+    public List<ProjectOutputs> searchProjectsByDept(Long deptId){
+        List<ProjectOutputs> projects = projMapper.selectByDepartment(deptId);
         projects.forEach(p -> p.setMembers(membersMapper.selectByProject(p.getProject_id())));
         return projects;
     }
 
-    public List<ProjectDetail> getProjectsByPart(Long userId) {
-        List<ProjectDetail> projects=projMapper.selectByParticipant(userId);
+    public List<ProjectOutputs> getProjectsByPart(Long userId) {
+        List<ProjectOutputs> projects=projMapper.selectByParticipant(userId);
         projects.forEach(p -> p.setMembers(membersMapper.selectByProject(p.getProject_id())));
         return projects;
     }
 
-    public List<ProjectDetail> getByStatus(String status){
-        List<ProjectDetail> projects = projMapper.selectByStatus(status);
+    public List<ProjectOutputs> getByStatus(String status){
+        List<ProjectOutputs> projects = projMapper.selectByStatus(status);
         projects.forEach(p -> p.setMembers(membersMapper.selectByProject(p.getProject_id())));
         return projects;
     }
-    public List<ProjectDetail> searchProjects(String keyword) {
-        List<ProjectDetail> projects = projMapper.searchProjects(keyword);
+    public List<ProjectOutputs> searchProjects(String keyword) {
+        List<ProjectOutputs> projects = projMapper.searchProjects(keyword);
         projects.forEach(p -> p.setMembers(membersMapper.selectByProject(p.getProject_id())));
         return projects;
     }
 
     @Override
-    public ProjectDetail createProject(@RequestBody ProjectDetail proj) {
+    public ProjectOutputs createProject(@RequestBody ProjectOutputs proj) {
         // 添加空值校验
         if (proj.getTitle() == null || proj.getTitle().isEmpty()) {
             throw new IllegalArgumentException("项目标题不能为空");
@@ -82,8 +82,8 @@ public class ProjServiceImpl implements ProjService {
     }
     
     @Override
-    public ProjectDetail updateProject(Long projectId, ProjectDetail updateProj) {
-        ProjectDetail existing = projMapper.selectProjectById(projectId);
+    public ProjectOutputs updateProject(Long projectId, ProjectOutputs updateProj) {
+        ProjectOutputs existing = projMapper.selectProjectById(projectId);
         if (existing == null) {
             throw new RuntimeException("Project not found");
         }

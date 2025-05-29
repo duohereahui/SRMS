@@ -1,6 +1,6 @@
 package com.chht.srms.service.impl;
 
-import com.chht.srms.domain.research.ResearchOutputs;
+import com.chht.srms.domain.achievements.AchievementsOutputs;
 import com.chht.srms.mapper.ResMapper;
 import com.chht.srms.mapper.UserMapper;
 import com.chht.srms.service.ResService;
@@ -21,44 +21,44 @@ public class ResServiceImpl implements ResService {
     private UserMapper userMapper;
 
     @Override
-    public List<ResearchOutputs> getAllRes() {
-        List<ResearchOutputs> research = resMapper.select(params);
+    public List<AchievementsOutputs> getAllRes() {
+        List<AchievementsOutputs> research = resMapper.select(params);
         research.forEach(p -> p.setAuthors(resMapper.selectAuthorByResearchId(p.getResearch_id())));
         return research;
     }
 
     @Override
-    public List<ResearchOutputs>  getByType(String type) {
+    public List<AchievementsOutputs>  getByType(String type) {
         params.put("type", type.toLowerCase());
-        List<ResearchOutputs> research = resMapper.select(params);
+        List<AchievementsOutputs> research = resMapper.select(params);
         research.forEach(p -> p.setAuthors(resMapper.selectAuthorByResearchId(p.getResearch_id())));
         return research;
     }
 
     @Override
-    public List<ResearchOutputs> getByState(String status) {
+    public List<AchievementsOutputs> getByState(String status) {
         params.put("status", status.toLowerCase());
-        List<ResearchOutputs> research = resMapper.select(params);
+        List<AchievementsOutputs> research = resMapper.select(params);
         research.forEach(p -> p.setAuthors(resMapper.selectAuthorByResearchId(p.getResearch_id())));
         return research;
     }
 
     @Override
-    public List<ResearchOutputs> getByResearchId(Long researchId) {
+    public List<AchievementsOutputs> getByResearchId(Long researchId) {
         params.put("researchId", String.valueOf(researchId));
-        List<ResearchOutputs> research = resMapper.select(params);
+        List<AchievementsOutputs> research = resMapper.select(params);
         research.forEach(p -> p.setAuthors(resMapper.selectAuthorByResearchId(p.getResearch_id())));
         return research;
     }
 
     @Override
-    public List<ResearchOutputs> searchResearch(String keyword) {
-        List<ResearchOutputs> research = resMapper.searchResearch(keyword);
+    public List<AchievementsOutputs> searchResearch(String keyword) {
+        List<AchievementsOutputs> research = resMapper.searchResearch(keyword);
         research.forEach(p -> p.setAuthors(resMapper.selectAuthorByResearchId(p.getResearch_id())));
         return research;
     }
     @Override
-    public ResearchOutputs createResearch(ResearchOutputs res){
+    public AchievementsOutputs createResearch(AchievementsOutputs res){
         if(res.getTitle() == null || res.getTitle().isEmpty()){
             throw new IllegalArgumentException("标题不能为空");
         }
@@ -75,12 +75,12 @@ public class ResServiceImpl implements ResService {
         });
         return res;
     }
-    public ResearchOutputs updateRes(Long resId, ResearchOutputs newRes){
+    public AchievementsOutputs updateRes(Long resId, AchievementsOutputs newRes){
 
         params.put("researchId", String.valueOf(resId));
-        List<ResearchOutputs> research = resMapper.select(params);
+        List<AchievementsOutputs> research = resMapper.select(params);
         research.forEach(p -> p.setAuthors(resMapper.selectAuthorByResearchId(p.getResearch_id())));
-        ResearchOutputs update=research.get(0);
+        AchievementsOutputs update=research.get(0);
 
         if (update == null) {
             throw new RuntimeException("Research not found");

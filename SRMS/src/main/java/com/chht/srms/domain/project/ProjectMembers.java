@@ -4,8 +4,8 @@ import lombok.Data;
 
 @Data
 public class ProjectMembers {
-    private Long project_id;
-    private Long user_id;
-    private String username;
+    private String project_id;
+    private Long per_id;
+    private String name;
     private String role;
 }
