@@ -1,6 +1,6 @@
 package com.chht.srms.controller;
 
-import com.chht.srms.domain.research.ResearchOutputs;
+import com.chht.srms.domain.achievements.AchievementsOutputs;
 import com.chht.srms.domain.shared.Result;
 import com.chht.srms.service.ResService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,13 +38,13 @@ public class ResController {
     }
 
     @PostMapping
-    public Result createResearch(@RequestBody ResearchOutputs res) {
+    public Result createResearch(@RequestBody AchievementsOutputs res) {
         res.setStatus("draft");
         return Result.success(resService.createResearch(res));
     }
 
     @PutMapping("/{resId}")
-    public Result updateResearch(@PathVariable Long resId, @RequestBody ResearchOutputs newRes) {
+    public Result updateResearch(@PathVariable Long resId, @RequestBody AchievementsOutputs newRes) {
         return Result.success(resService.updateRes(resId,newRes));
     }
 

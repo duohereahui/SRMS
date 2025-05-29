@@ -40,8 +40,6 @@ public interface UserMapper {
     List<User> findByLabId(Long lab_id);
 
 
-    @Select("SELECT  * FROM user where department_id=#{deptId}")
-    List<User> findByDeptId(Long deptId);
 
     @Select("SELECT * FROM user WHERE username = #{credential} OR email = #{credential} OR phone = #{credential}")
     User selectByAnyCredential(@Param("credential") String credential);

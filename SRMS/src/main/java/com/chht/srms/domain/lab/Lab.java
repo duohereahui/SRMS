@@ -5,10 +5,11 @@ import lombok.Data;
 import java.sql.Date;
 
 @Data
-public class lab {
+public class Lab {
     private Long lab_id;
+    private Long leader_id;
+    private String leader_name;
     private String name;
     private String description;
     private String location;
-    private Long department_id;
 }

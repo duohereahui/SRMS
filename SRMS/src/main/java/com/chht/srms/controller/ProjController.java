@@ -1,6 +1,6 @@
 package com.chht.srms.controller;
 
-import com.chht.srms.domain.project.ProjectDetail;
+import com.chht.srms.domain.project.ProjectOutputs;
 import com.chht.srms.domain.shared.Result;
 import com.chht.srms.service.ProjService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,7 +41,7 @@ public class ProjController {
 
     @PostMapping//需json格式
     public Result createProject(
-        @RequestBody ProjectDetail proj) {
+        @RequestBody ProjectOutputs proj) {
         proj.setStatus("draft");
         return Result.success(projService.createProject(proj));
     }
@@ -50,7 +50,7 @@ public class ProjController {
     @PutMapping("/{projectId}")
     public Result updateProject(
         @PathVariable Long projectId,
-        @RequestBody ProjectDetail updateProj) {
+        @RequestBody ProjectOutputs updateProj) {
         return Result.success(projService.updateProject(projectId, updateProj));
     }
 

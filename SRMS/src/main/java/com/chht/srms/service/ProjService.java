@@ -1,23 +1,23 @@
 package com.chht.srms.service;
 
-import com.chht.srms.domain.project.ProjectDetail;
+import com.chht.srms.domain.project.ProjectOutputs;
 
 import java.util.List;
 
 public interface ProjService {
-    List<ProjectDetail> getAllProjects();
+    List<ProjectOutputs> getAllProjects();
 
-    List<ProjectDetail> getProjectsByPart(Long userId);
+    List<ProjectOutputs> getProjectsByPart(Long userId);
 
-    List<ProjectDetail> getByStatus(String status);
+    List<ProjectOutputs> getByStatus(String status);
 
-    List<ProjectDetail> searchProjects(String keyword);
+    List<ProjectOutputs> searchProjects(String keyword);
 
-    List<ProjectDetail> searchProjectsByDept(Long deptId);
+    List<ProjectOutputs> searchProjectsByDept(Long deptId);
 
-    ProjectDetail createProject(ProjectDetail project);
+    ProjectOutputs createProject(ProjectOutputs project);
 
-    Object updateProject(Long projectId, ProjectDetail updateProj);
+    Object updateProject(Long projectId, ProjectOutputs updateProj);
     
     void deleteProject(Long projectId);
 }

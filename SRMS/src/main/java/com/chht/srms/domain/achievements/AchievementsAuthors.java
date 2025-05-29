@@ -1,9 +1,9 @@
-package com.chht.srms.domain.research;
+package com.chht.srms.domain.achievements;
 
 import lombok.Data;
 
 @Data
-public class ResearchAuthors {
+public class AchievementsAuthors {
     private Long research_id;
     private Long author_id;
     private String username;
